@@ -11,14 +11,14 @@ function TopRatedList() {
 	const [page, setPage] = useState(1);
 
 	useEffect(() => {
-		fetchTopRated((data) => {
+		fetchTopRated(page,(data) => {
 			const itemsWithPosters = data.results.map((item) => ({
 				...item,
 				poster_path: fetchImage(item.poster_path),
 			}));
 			setList(itemsWithPosters);
 			setPage(data.page);
-		}, page);
+		});
 		console.log(page);
 	}, [page]);
 

@@ -1,3 +1,5 @@
+/* const api_key = "api_key=b90b26f854e36d21f50be7bd1c0b7500"; */
+
 const options = {
 	method: "GET",
 	headers: {
@@ -7,14 +9,14 @@ const options = {
 	},
 };
 
-export const fetchTopRated = async (callback, page) => {
+export const fetchTopRated = async (page, callback) => {
 	const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-SE&page=${page}`;
 	const response = await fetch(url, options);
 	const result = await response.json();
 	callback(result);
 };
 
-export const fetchPopular = async (callback, page) => {
+export const fetchPopular = async (page, callback) => {
 	const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
 	const response = await fetch(url, options);
 	const result = await response.json();
@@ -28,7 +30,22 @@ export const fetchImage = (imgPath) => {
 export const fetchDetails = async (titleId, callback) => {
 	const url = `https://api.themoviedb.org/3/movie/${titleId}`;
 	const response = await fetch(url, options);
-	const result = await response.json();
-	callback(result);
+	const movieDetails = await response.json();
+	callback(movieDetails);
 };
-/* const api_key = "api_key=b90b26f854e36d21f50be7bd1c0b7500"; */
+
+export const fetchRecommendations = async (titleId, page, callback) => {
+	const url = `https://api.themoviedb.org/3/movie/${titleId}/recommendations?language=en-US&page=${page}`;
+	const response = await fetch(url, options);
+	const rec = await response.json();
+	callback(rec);
+};
+
+export const fetchSearch = async (titleId, page, callback) => {
+	const url = `https://api.themoviedb.org/3/search/movie?query=${titleId}&include_adult=false&language=en-US&page=${page}`;
+	const response = await fetch(url, options);
+	const search = await response.json();
+	callback(search);
+}
+
+ 

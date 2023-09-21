@@ -1,4 +1,5 @@
 import { ReactComponent as HeaderLogo } from "../img/tmdb_logo_long.svg";
+import SearchMovie from "./Search";
 
 const HeaderComponent = () => {
 	return (
