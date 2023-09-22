@@ -9,12 +9,13 @@ function PopularList() {
 	const [list, setList] = useState([]);
 	const [movieId, setMovieId] = useRecoilState(movieIdState);
 	const [page, setPage] = useState(1);
+	const imgWidth = "w154";
 
 	useEffect(() => {
 		fetchPopular(page, (data) => {
 			const itemsWithPosters = data.results.map((item) => ({
 				...item,
-				poster_path: fetchImage(item.poster_path),
+				poster_path: fetchImage(imgWidth, item.poster_path),
 			}));
 			setList(itemsWithPosters);
 			setPage(data.page);

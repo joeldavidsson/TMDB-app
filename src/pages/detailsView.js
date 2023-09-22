@@ -1,45 +1,70 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { fetchDetails, fetchImage, fetchRecommendations } from "../api/api";
-import { SelectedTitleState, movieIdState } from "../states/recoil";
-import { useRecoilState, useRecoilValue } from "recoil";
-
+import {
+	SelectedTitleState,
+	movieIdState,
+	movieRecState,
+} from "../states/recoil";
+import { useRecoilState } from "recoil";
+import {
+	saveToLocalStorage,
+	loadFromLocalStorage,
+} from "../storage/movieStorage";
 
 function Details() {
 	const [titleDetails, setTitleDetails] = useRecoilState(SelectedTitleState);
 	const [movieId, setMovieId] = useRecoilState(movieIdState);
-	const [recommendations, setRecommendations] = useState([]);
-	const [page, setPage] = useState(1);
+	const [recommendations, setRecommendations] = useRecoilState(movieRecState);
+	const imgWidth = "w154";
 
 	useEffect(() => {
-		fetchDetails(movieId, (data) => {
-			setTitleDetails(data);
-			console.log(movieId);
-		});
-	}, [setTitleDetails, movieId]);
+		const storedMovieId = loadFromLocalStorage("movieId");
+		const storedTitleDetails = loadFromLocalStorage("titleDetails");
+		const storedRecommendations = loadFromLocalStorage("recommendations");
 
-	useEffect(() => {
-		fetchRecommendations(
-			movieId,
-			page,
-			(data) => {
-				const itemsWithPosters = data.results.map((item) => ({
-					...item,
-					poster_path: fetchImage(item.poster_path),
-				}));
-				setRecommendations(itemsWithPosters);
-				setPage(data.page);
+		if (storedMovieId !== null) {
+			setMovieId(storedMovieId);
+		}
+
+		if (storedTitleDetails !== null) {
+			setTitleDetails(storedTitleDetails);
+		}
+
+		if (storedRecommendations !== null) {
+			setRecommendations(storedRecommendations);
+		}
+
+		if (movieId !== 0) {
+			fetchDetails(movieId, (data) => {
+				setTitleDetails(data);
+				saveToLocalStorage("titleDetails", data);
+				console.log(data);
 			});
-		console.log(page);
-	}, [page, movieId]);
 
-	const handleItemClick = (data) => {
-		setMovieId(data.id);
+			fetchRecommendations(movieId, (data) => {
+				console.log("Recommendations API Response:", data);
+				if (Array.isArray(data)) {
+					setRecommendations(data);
+					saveToLocalStorage("recommendations", data);
+				} else {
+					setRecommendations([]);
+				}
+			});
+		}
+	}, [movieId, setTitleDetails, setRecommendations, setMovieId]);
+
+	const handleItemClick = (item) => {
+		setMovieId(item.id);
+		saveToLocalStorage("movieId", item.id);
 	};
 
 	return (
 		<div>
 			<div>
-				<img src={fetchImage(titleDetails.poster_path)}></img>
+				<img
+					src={fetchImage(imgWidth, titleDetails.poster_path)}
+					alt={titleDetails.title}
+				></img>
 				<h1 className='text-xl'>{titleDetails.title}</h1>
 				<span>
 					<p>Genres: </p>
@@ -59,10 +84,13 @@ function Details() {
 			<div>
 				<ul>
 					<h1>If you like this movie, you might like these: </h1>
-					{recommendations.map((data) => (
-						<li key={data.id} onClick={() => handleItemClick(data)}>
-							<img src={fetchImage(data.poster_path)}></img>
-							<h1 className='text-xl'>{data.title}</h1>
+					{recommendations.map((item) => (
+						<li key={item.id} onClick={() => handleItemClick(item)}>
+							<img
+								src={fetchImage(imgWidth, item.poster_path)}
+								alt={titleDetails.title}
+							></img>
+							<h1 className='text-xl'>{item.title}</h1>
 						</li>
 					))}
 				</ul>

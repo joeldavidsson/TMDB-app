@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Details from "./pages/detailsView";
 import Layer from "./pages/layer";
+
 /* import Details from ".pages/details"; */
 
 function App() {
+
+
 	return (
 		<Routes>
 			<Route path='/' element={<Layer />}>

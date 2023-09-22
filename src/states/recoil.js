@@ -9,3 +9,8 @@ export const movieIdState = atom({
 	key: "movieId",
 	default: 0,
 });
+
+export const movieRecState = atom({
+	key: "recommendation",
+	default: [],
+});

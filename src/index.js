@@ -10,7 +10,7 @@ root.render(
 	<React.StrictMode>
 		<RecoilRoot>
 			<Router>
-				<App />
+				<App/>
 			</Router>
 		</RecoilRoot>
 	</React.StrictMode>

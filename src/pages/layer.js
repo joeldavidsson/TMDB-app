@@ -5,11 +5,11 @@ import SearchMovie from "../components/Search";
 
 function Layer() {
 	return (
-		<div className='flex flex-wrap w-full min-h-screen min'>
+		<div className='flex flex-wrap w-full min-h-screen'>
 			<div className='w-screen top-0 sticky'>
 				<HeaderComponent />
 			</div>
-			<div className='flex w-full'>
+			<div className='flex w-full h-fit'>
 				<SearchMovie />
 			</div>
 			<div className='flex justify-center w-full min-h-screen'>

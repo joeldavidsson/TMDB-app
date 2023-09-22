@@ -1,5 +1,3 @@
-/* const api_key = "api_key=b90b26f854e36d21f50be7bd1c0b7500"; */
-
 const options = {
 	method: "GET",
 	headers: {
@@ -17,14 +15,18 @@ export const fetchTopRated = async (page, callback) => {
 };
 
 export const fetchPopular = async (page, callback) => {
-	const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
+	const url = `https://api.themoviedb.org/3/movie/popular?language=en-SE&page=${page}`;
 	const response = await fetch(url, options);
 	const result = await response.json();
 	callback(result);
 };
 
-export const fetchImage = (imgPath) => {
-	return `https://image.tmdb.org/t/p/w154${imgPath}`;
+export const fetchImage = (imgWidth, imgPath) => {
+	if (imgPath) {
+		return `https://image.tmdb.org/t/p/${imgWidth}${imgPath}`;
+	} else {
+		return `../img/no_image_${imgWidth}.png`;
+	}
 };
 
 export const fetchDetails = async (titleId, callback) => {
@@ -34,18 +36,17 @@ export const fetchDetails = async (titleId, callback) => {
 	callback(movieDetails);
 };
 
-export const fetchRecommendations = async (titleId, page, callback) => {
-	const url = `https://api.themoviedb.org/3/movie/${titleId}/recommendations?language=en-US&page=${page}`;
+export const fetchRecommendations = async (titleId, callback) => {
+	const url = `https://api.themoviedb.org/3/movie/${titleId}/recommendations?language=en-SE&page=1`;
 	const response = await fetch(url, options);
-	const rec = await response.json();
+	const result = await response.json();
+	const rec = result.results;
 	callback(rec);
 };
 
 export const fetchSearch = async (titleId, page, callback) => {
-	const url = `https://api.themoviedb.org/3/search/movie?query=${titleId}&include_adult=false&language=en-US&page=${page}`;
+	const url = `https://api.themoviedb.org/3/search/movie?query=${titleId}&include_adult=false&language=en-SE&page=${page}`;
 	const response = await fetch(url, options);
 	const search = await response.json();
 	callback(search);
-}
-
- 
+};

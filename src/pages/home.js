@@ -1,9 +1,9 @@
 import TopRatedList from "../components/TopRatedList";
 import PopularList from "../components/PopularList";
-import HeaderComponent from "../components/HeaderComponent";
-import FooterComponent from "../components/FooterComponent";
+import { clearLocalStorage } from "../storage/movieStorage";
 
 function Home() {
+	clearLocalStorage("movieId", "titleDetails", "recommendations");
 	return (
 		<>
 			<TopRatedList />
