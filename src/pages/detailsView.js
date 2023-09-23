@@ -15,7 +15,6 @@ function Details() {
 	const [titleDetails, setTitleDetails] = useRecoilState(SelectedTitleState);
 	const [movieId, setMovieId] = useRecoilState(movieIdState);
 	const [recommendations, setRecommendations] = useRecoilState(movieRecState);
-	const imgWidth = "w154";
 
 	useEffect(() => {
 		const storedMovieId = loadFromLocalStorage("movieId");
@@ -62,7 +61,7 @@ function Details() {
 		<div>
 			<div>
 				<img
-					src={fetchImage(imgWidth, titleDetails.poster_path)}
+					src={fetchImage("w154", titleDetails.poster_path)}
 					alt={titleDetails.title}
 				></img>
 				<h1 className='text-xl'>{titleDetails.title}</h1>
@@ -87,7 +86,7 @@ function Details() {
 					{recommendations.map((item) => (
 						<li key={item.id} onClick={() => handleItemClick(item)}>
 							<img
-								src={fetchImage(imgWidth, item.poster_path)}
+								src={fetchImage("w154", item.poster_path)}
 								alt={titleDetails.title}
 							></img>
 							<h1 className='text-xl'>{item.title}</h1>

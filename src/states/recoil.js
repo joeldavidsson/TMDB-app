@@ -14,3 +14,8 @@ export const movieRecState = atom({
 	key: "recommendation",
 	default: [],
 });
+
+export const SearchTitleState = atom({
+	key: "searchTitle",
+	default: "",
+});

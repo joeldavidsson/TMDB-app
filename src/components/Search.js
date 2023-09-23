@@ -3,24 +3,23 @@ import { fetchSearch, fetchImage } from "../api/api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { movieIdState } from "../states/recoil";
+import { movieIdState, SearchTitleState } from "../states/recoil";
 
 function SearchMovie() {
-	const [title, setTitle] = useState("");
+	const [searchTitle, setSearchTitle] = useRecoilState(SearchTitleState);
 	const [page, setPage] = useState(1);
 	const [searchResults, setSearchResults] = useState([]);
 	const [movieId, setMovieId] = useRecoilState(movieIdState);
-	const imgWidth = "w92";
 
 	useEffect(() => {
-		fetchSearch(title, page, (data) => {
+		fetchSearch(searchTitle, page, (data) => {
 			setSearchResults(data.results);
 		});
 	});
 
 	const handleItemClick = (result) => {
 		setMovieId(result.id);
-		setTitle("");
+		setSearchTitle("");
 	};
 
 	return (
@@ -28,8 +27,8 @@ function SearchMovie() {
 			<input
 				type='text'
 				placeholder='Search for a movie...'
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
+				value={searchTitle}
+				onChange={(e) => setSearchTitle(e.target.value)}
 				className='self-center w-1/4'
 			/>
 
@@ -38,13 +37,13 @@ function SearchMovie() {
 					<div
 						className='hover:bg-red-950'
 						onClick={() => handleItemClick(result)}
+						key={result.id}
 					>
 						<Link to='./pages/detailsView'>
-							<img
-								src={fetchImage(imgWidth, result.poster_path)}
-								alt={result.title}
-							></img>
-							<li key={result.id}>{result.title}</li>
+							<li>{result.title}</li>
+							<li>
+								<img src={fetchImage("w92", result.poster_path)}></img>
+							</li>
 						</Link>
 					</div>
 				))}

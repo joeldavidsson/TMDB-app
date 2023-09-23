@@ -22,11 +22,9 @@ export const fetchPopular = async (page, callback) => {
 };
 
 export const fetchImage = (imgWidth, imgPath) => {
-	if (imgPath) {
-		return `https://image.tmdb.org/t/p/${imgWidth}${imgPath}`;
-	} else {
-		return `../img/no_image_${imgWidth}.png`;
-	}
+	return imgPath
+		? `https://image.tmdb.org/t/p/${imgWidth}${imgPath}`
+		: `/img/no_image_${imgWidth}.png`;
 };
 
 export const fetchDetails = async (titleId, callback) => {
