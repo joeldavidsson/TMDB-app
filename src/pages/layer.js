@@ -12,7 +12,7 @@ function Layer() {
 			<div className='flex w-full h-fit'>
 				<SearchMovie />
 			</div>
-			<div className='flex justify-center w-full min-h-screen'>
+			<div className='w-full min-h-screen bg-[#0d253ff6] text-white'>
 				<Outlet />
 			</div>
 			<div className='w-screen bottom-0'>

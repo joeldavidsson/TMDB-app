@@ -1,9 +1,8 @@
-import { ReactComponent as FooterLogo } from "../img/tmdb_logo_short.svg";
 
 const FooterComponent = () => {
 	return (
 		<footer className='flex bg-[#0d253f] text-white font-semibold'>
-			<FooterLogo className='w-1/4' />
+			<img src='/img/tmdb_logo_short.svg' className='w-1/4'></img>
 			<p>
 				This product uses the TMDB API but is not endorsed or certified by TMDB.
 			</p>

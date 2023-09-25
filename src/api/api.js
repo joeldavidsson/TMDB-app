@@ -48,3 +48,18 @@ export const fetchSearch = async (titleId, page, callback) => {
 	const search = await response.json();
 	callback(search);
 };
+
+export const fetchGenres = async (callback) => {
+	const url = "https://api.themoviedb.org/3/genre/movie/list?language=en-SE";
+	const response = await fetch(url, options);
+	const result = await response.json();
+	const genres = result.genres;
+	callback(genres);
+};
+
+export const fetchDiscoverBy = async (page, sort, genreId, callback) => {
+	const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SE&${page}=1&sort_by=popularity.${sort}&with_genres=${genreId}`;
+	const response = await fetch(url, options);
+	const result = await response.json();
+	callback(result);
+};

@@ -3,17 +3,17 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Details from "./pages/detailsView";
 import Layer from "./pages/layer";
+import DiscoverGenre from "./pages/discover";
 
 /* import Details from ".pages/details"; */
 
 function App() {
-
-
 	return (
 		<Routes>
 			<Route path='/' element={<Layer />}>
 				<Route index element={<Home />} />
 				<Route path='pages/detailsView' element={<Details />} />
+				<Route path='pages/discover' element={<DiscoverGenre />} />
 			</Route>
 		</Routes>
 	);
