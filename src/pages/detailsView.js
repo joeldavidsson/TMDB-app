@@ -10,6 +10,7 @@ import {
 	saveToLocalStorage,
 	loadFromLocalStorage,
 } from "../storage/movieStorage";
+import { HandleItemClickSave } from "../components/Utilities";
 
 function Details() {
 	const [titleDetails, setTitleDetails] = useRecoilState(SelectedTitleState);
@@ -52,11 +53,6 @@ function Details() {
 		}
 	}, [movieId, setTitleDetails, setRecommendations, setMovieId]);
 
-	const handleItemClick = (item) => {
-		setMovieId(item.id);
-		saveToLocalStorage("movieId", item.id);
-	};
-
 	return (
 		<div>
 			<div>
@@ -84,7 +80,10 @@ function Details() {
 				<ul>
 					<h1>If you like this movie, you might like these: </h1>
 					{recommendations.map((item) => (
-						<li key={item.id} onClick={() => handleItemClick(item)}>
+						<li
+							key={item.id}
+							onClick={() => HandleItemClickSave({ item, setMovieId })}
+						>
 							<img
 								src={fetchImage("w154", item.poster_path)}
 								alt={titleDetails.title}

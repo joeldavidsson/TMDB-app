@@ -3,7 +3,7 @@ import { fetchImage, fetchPopular } from "../api/api";
 import { useRecoilState } from "recoil";
 import { movieIdState } from "../states/recoil";
 import { Link } from "react-router-dom";
-
+import { HandleItemClick, NextPageButton, PrevPageButton } from "./Utilities";
 
 function PopularList() {
 	const [list, setList] = useState([]);
@@ -23,10 +23,6 @@ function PopularList() {
 		console.log(page);
 	}, [page]);
 
-	const handleItemClick = (item) => {
-		setMovieId(item.id);
-	};
-
 	return (
 		<>
 			<Link to='./pages/detailsView'>
@@ -34,7 +30,10 @@ function PopularList() {
 					<h1 className='text-4xl'>Popular movies</h1>
 					<ul>
 						{list.map((item) => (
-							<li key={item.id} onClick={() => handleItemClick(item)}>
+							<li
+								key={item.id}
+								onClick={() => HandleItemClick({ item, setMovieId })}
+							>
 								<img src={item.poster_path} alt={item.title} />
 								<h2>{item.title}</h2>
 								Rating: {item.vote_average}
@@ -43,22 +42,8 @@ function PopularList() {
 					</ul>
 				</div>
 			</Link>
-			<button
-				onClick={() => {
-					setPage(page + 1);
-				}}
-			>
-				Next Page
-			</button>
-			<button
-				onClick={() => {
-					if (page > 1) {
-						setPage(page - 1);
-					}
-				}}
-			>
-				Previous Page
-			</button>
+			<NextPageButton page={page} setPage={setPage} />
+			<PrevPageButton page={page} setPage={setPage} />
 		</>
 	);
 }

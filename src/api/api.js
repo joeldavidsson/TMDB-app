@@ -58,7 +58,7 @@ export const fetchGenres = async (callback) => {
 };
 
 export const fetchDiscoverBy = async (page, sort, genreId, callback) => {
-	const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SE&${page}=1&sort_by=popularity.${sort}&with_genres=${genreId}`;
+	const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SE&page=${page}&sort_by=popularity.${sort}&with_genres=${genreId}`;
 	const response = await fetch(url, options);
 	const result = await response.json();
 	callback(result);

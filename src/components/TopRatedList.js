@@ -3,29 +3,24 @@ import { fetchTopRated, fetchImage } from "../api/api";
 import { useRecoilState } from "recoil";
 import { movieIdState } from "../states/recoil";
 import { Link } from "react-router-dom";
+import { HandleItemClick, NextPageButton, PrevPageButton } from "./Utilities";
 
 function TopRatedList() {
 	const [list, setList] = useState([]);
 	const [movieId, setMovieId] = useRecoilState(movieIdState);
 	const [page, setPage] = useState(1);
 
-	const imgWidth = "w154";
-
 	useEffect(() => {
 		fetchTopRated(page, (data) => {
 			const itemsWithPosters = data.results.map((item) => ({
 				...item,
-				poster_path: fetchImage(imgWidth, item.poster_path),
+				poster_path: fetchImage("w154", item.poster_path),
 			}));
 			setList(itemsWithPosters);
 			setPage(data.page);
 		});
 		console.log(page);
 	}, [page]);
-
-	const handleItemClick = (item) => {
-		setMovieId(item.id);
-	};
 
 	return (
 		<div className='cursor-auto'>
@@ -34,7 +29,10 @@ function TopRatedList() {
 					<h1 className='text-4xl'>Top rated movies</h1>
 					<ul>
 						{list.map((item) => (
-							<li key={item.id} onClick={() => handleItemClick(item)}>
+							<li
+								key={item.id}
+								onClick={() => HandleItemClick({ item, setMovieId })}
+							>
 								<img src={item.poster_path} alt={item.title} />
 								<h2>{item.title}</h2>
 								Rating: {item.vote_average}
@@ -43,22 +41,8 @@ function TopRatedList() {
 					</ul>
 				</div>
 			</Link>
-			<button
-				onClick={() => {
-					setPage(page + 1);
-				}}
-			>
-				Next Page
-			</button>
-			<button
-				onClick={() => {
-					if (page > 1) {
-						setPage(page - 1);
-					}
-				}}
-			>
-				Previous Page
-			</button>
+			<NextPageButton page={page} setPage={setPage} />
+			<PrevPageButton page={page} setPage={setPage} />
 		</div>
 	);
 }

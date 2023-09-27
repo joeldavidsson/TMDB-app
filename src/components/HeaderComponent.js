@@ -20,12 +20,12 @@ const HeaderComponent = () => {
 			</span>
 
 			<nav className='flex w-3/4 p-5 justify-evenly'>
-				<a>Home</a>
-				<a>Top rated movies</a>
+				<p>Home</p>
+				<p>Top rated movies</p>
 				<Link to='./pages/discover'>
-					<a>Discover</a>
+					<p>Discover</p>
 				</Link>
-				<a>Create your own top list</a>
+				<p>Create your own top list</p>
 			</nav>
 		</header>
 	);
