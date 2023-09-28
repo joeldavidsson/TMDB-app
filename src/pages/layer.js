@@ -8,10 +8,9 @@ function Layer() {
 		<div className='flex flex-wrap w-full min-h-screen'>
 			<div className='w-screen top-0 sticky'>
 				<HeaderComponent />
-			</div>
-			<div className='flex w-full h-fit'>
-				<SearchMovie />
-			</div>
+				<SearchMovie className='flex w-full h-fit' />
+				</div>
+		
 			<div className='w-full min-h-screen bg-[#0d253ff6] text-white'>
 				<Outlet />
 			</div>

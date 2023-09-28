@@ -19,3 +19,13 @@ export const SearchTitleState = atom({
 	key: "searchTitle",
 	default: "",
 });
+
+export const GenreIdState = atom({
+	key: "genreId",
+	default: 0,
+});
+
+export const GenreTitleState = atom({
+	key: "genreTitle",
+	default: '',
+});

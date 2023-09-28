@@ -21,10 +21,10 @@ export const fetchPopular = async (page, callback) => {
 	callback(result);
 };
 
-export const fetchImage = (imgWidth, imgPath) => {
+export const fetchImage = (imgPath) => {
 	return imgPath
-		? `https://image.tmdb.org/t/p/${imgWidth}${imgPath}`
-		: `/img/no_image_${imgWidth}.png`;
+		? `https://image.tmdb.org/t/p/w780${imgPath}`
+		: `/img/no_image_w154.png`;
 };
 
 export const fetchDetails = async (titleId, callback) => {
@@ -58,7 +58,7 @@ export const fetchGenres = async (callback) => {
 };
 
 export const fetchDiscoverBy = async (page, sort, genreId, callback) => {
-	const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SE&page=${page}&sort_by=popularity.${sort}&with_genres=${genreId}`;
+	const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SE&page=${page}&sort_by=${sort}&with_genres=${genreId}&vote_count.gte=75`;
 	const response = await fetch(url, options);
 	const result = await response.json();
 	callback(result);

@@ -39,10 +39,15 @@ function SearchMovie() {
 						onClick={() => handleItemClick(result)}
 						key={result.id}
 					>
-						<Link to='./pages/detailsView'>
-							<li>{result.title}</li>
+						<Link to='./pages/detailsView' className=''>
+							<li className='max-w-[192px] whitespace-nowrap overflow-hidden text-ellipsis'>
+								{result.title}
+							</li>
 							<li>
-								<img src={fetchImage("w92", result.poster_path)}></img>
+								<img
+									className='w-[192px]'
+									src={fetchImage(result.poster_path)}
+								></img>
 							</li>
 						</Link>
 					</div>

@@ -4,18 +4,26 @@ import {
 	SelectedTitleState,
 	movieIdState,
 	movieRecState,
+	GenreIdState,
+	GenreTitleState,
 } from "../states/recoil";
 import { useRecoilState } from "recoil";
 import {
 	saveToLocalStorage,
 	loadFromLocalStorage,
 } from "../storage/movieStorage";
-import { HandleItemClickSave } from "../components/Utilities";
+import {
+	HandleItemClickSave,
+	HandleItemClickGenre,
+} from "../components/Utilities";
+import { Link } from "react-router-dom";
 
 function Details() {
 	const [titleDetails, setTitleDetails] = useRecoilState(SelectedTitleState);
 	const [movieId, setMovieId] = useRecoilState(movieIdState);
 	const [recommendations, setRecommendations] = useRecoilState(movieRecState);
+	const [genreId, setGenreId] = useRecoilState(GenreIdState);
+	const [genreTitle, setGenreTitle] = useRecoilState(GenreTitleState);
 
 	useEffect(() => {
 		const storedMovieId = loadFromLocalStorage("movieId");
@@ -57,7 +65,7 @@ function Details() {
 		<div>
 			<div>
 				<img
-					src={fetchImage("w154", titleDetails.poster_path)}
+					src={fetchImage(titleDetails.poster_path)}
 					alt={titleDetails.title}
 				></img>
 				<h1 className='text-xl'>{titleDetails.title}</h1>
@@ -65,9 +73,13 @@ function Details() {
 					<p>Genres: </p>
 					{titleDetails.genres &&
 						titleDetails.genres.map((item) => (
-							<div key={item.id}>
-								<p>{item.name}</p>
-							</div>
+							<Link to='../pages/discoverGenreView'>
+								<div key={item.id}>
+									<p onClick={() => HandleItemClickGenre({ item, setGenreId, setGenreTitle })}>
+										{item.name}
+									</p>
+								</div>
+							</Link>
 						))}
 				</span>
 				<p>Release date: {titleDetails.release_date}</p>
@@ -85,7 +97,7 @@ function Details() {
 							onClick={() => HandleItemClickSave({ item, setMovieId })}
 						>
 							<img
-								src={fetchImage("w154", item.poster_path)}
+								src={fetchImage(item.poster_path)}
 								alt={titleDetails.title}
 							></img>
 							<h1 className='text-xl'>{item.title}</h1>
