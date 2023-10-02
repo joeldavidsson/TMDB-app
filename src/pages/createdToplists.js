@@ -29,7 +29,7 @@ function CreatedTopListView() {
 										key={index}
 									>
 										<li className='font-bold text-2xl mb-5'>{index + 1}</li>
-										<li className='w-[160px] border-[black] border-4'>
+										<li className='w-[160px] border-[black] border-4 hover:opacity-80'>
 											<GetPoster movie={movie} />
 										</li>
 										<li className='max-w-[160px] font-semibold p-3 text-l'>

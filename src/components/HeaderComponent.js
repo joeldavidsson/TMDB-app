@@ -11,7 +11,7 @@ const HeaderComponent = () => {
 				<ScrollToTopLink to='/'>
 					<img
 						src='/img/tmdb_logo_long.svg'
-						className='h-28 '
+						className='h-20 '
 						onClick={() => {
 							setSearchTitle("");
 						}}
@@ -30,16 +30,16 @@ const HeaderComponent = () => {
 					</p>
 				</ScrollToTopLink>
 				<ScrollToTopLink to='popular' className='hover:text-slate-300'>
-					<p>Popular</p>
+					<p onClick={() => setSearchTitle("")}>Popular</p>
 				</ScrollToTopLink>
 				<ScrollToTopLink to='toprated' className='hover:text-slate-300'>
-					<p>Top rated</p>
+					<p onClick={() => setSearchTitle("")}>Top rated</p>
 				</ScrollToTopLink>
 				<ScrollToTopLink to='discover' className='hover:text-slate-300'>
-					<p>Discover</p>
+					<p onClick={() => setSearchTitle("")}>Discover</p>
 				</ScrollToTopLink>
 				<ScrollToTopLink to='toplist' className='hover:text-slate-300'>
-					<p>Create top list</p>
+					<p onClick={() => setSearchTitle("")}>Create top list</p>
 				</ScrollToTopLink>
 			</nav>
 		</header>

@@ -80,7 +80,7 @@ function Details() {
 				<h2 className='text-lg'>
 					If you like this movie, you might like these titles:{" "}
 				</h2>
-				<ul className='flex flex-row w-full self-center justify-center text-center p-10 gap-6 overflow-hidden'>
+				<ul className='flex flex-row w-full self-center justify-start text-center p-7 gap-5 overflow-hidden'>
 					{recommendations.map((item) => (
 						<ScrollToTopLink to={`../details/${item.id}`}>
 							<li className='flex w-28 h-44 border-2 border-black hover:opacity-80 shadow-2xl'>

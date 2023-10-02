@@ -111,19 +111,19 @@ function TopList() {
 					placeholder='Add movies to your list...'
 					value={topListSearchTitle}
 					onChange={(e) => setTopListSearchTitle(e.target.value)}
-					className='self-center text-white w-1/4 text-center text-lg p-1 rounded-2xl  outline-none bg-[#2C3639] focus:bg-[#DCD7C9] focus:text-black'
+					className='self-center text-white w-1/4 text-center text-lg p-1 rounded-2xl  outline-none bg-[#DCD7C9]  focus:text-black hover:placeholder-white absolute z-20 '
 				/>
-				<ul className='flex flex-row flex-wrap w-full self-center justify-center bg-[#2C3639] absolute z-10 mt-10 rounded-xl gap-4 shadow-2xl'>
+				<ul className='flex flex-row flex-wrap w-full self-center justify-center bg-[#2C3639] absolute z-10 rounded-xl gap-4 shadow-2xl'>
 					{movies.map((result) => (
 						<div
-							className='flex flex-col my-5 items-center'
+							className='items-center py-10'
 							onClick={() => addToTopList(result)}
 							key={result.id}
 						>
-							<li className='flex w-28 h-44 border-2 border-black hover:opacity-80 shadow-2xl'>
+							<li className='flex w-28 h-44 border-2 border-black hover:opacity-80 shadow-2xl z-10 relative'>
 								<GetPoster movie={result} />
 							</li>
-							<li className='w-28 whitespace-nowrap overflow-hidden text-ellipsis text-center hover:overflow-visible hover:whitespace-normal font-semibold'>
+							<li className='w-28 whitespace-nowrap overflow-hidden text-ellipsis text-center font-semibold hover:bg-[#0000009d] hover:whitespace-normal rounded-b-lg absolute z-20 p-1'>
 								{result.title}
 							</li>
 						</div>
@@ -131,7 +131,7 @@ function TopList() {
 				</ul>
 			</section>
 
-			<section className='flex flex-col w-full p-5 h-96'>
+			<section className='flex flex-col w-full p-5 h-auto'>
 				<ul className='flex flex-row flex-wrap self-center justify-center w-full gap-5'>
 					{topList.map((list, index) => (
 						<div
@@ -164,13 +164,13 @@ function TopList() {
 				</ul>
 			</section>
 
-			<section className='flex flex-col justify-self-end mt-10'>
+			<section className='flex flex-col justify-self-end '>
 				<input
 					type='text'
 					placeholder='Give your list a name!'
 					value={listTitle}
 					onChange={handleTitleInput}
-					className='flex justify-self-end text-lg self-center text-black w-1/8 text-center p-1 rounded-md bg-[#2C3639] border-[#A27B5C] outline-none focus:bg-[#DCD7C9] focus:text-black mt-7 '
+					className='flex justify-self-end text-lg self-center text-black w-1/8 text-center p-1 m-5 rounded-md bg-[#2C3639] border-[#A27B5C] outline-none hover:placeholder-white focus:bg-[#DCD7C9] focus:text-black mt-7 '
 				></input>
 				<span className='flex flex-row'>
 					<button
