@@ -5,38 +5,26 @@ import Details from "./pages/detailsView";
 import Layer from "./pages/layer";
 import DiscoverGenre from "./pages/discover";
 import GenreMovieList from "./pages/discoverGenreView";
-
-/* import Details from ".pages/details"; */
+import TopList from "./pages/toplist";
+import CreatedTopListView from "./pages/createdToplists";
+import TopRatedList from "./pages/TopRatedList";
+import PopularList from "./pages/PopularList";
 
 function App() {
 	return (
 		<Routes>
+			<Route index element={<Home />} />
 			<Route path='/' element={<Layer />}>
-				<Route index element={<Home />} />
-				<Route path='pages/detailsView/' element={<Details />} />
-				<Route path='pages/discover' element={<DiscoverGenre />} />
-				<Route path='pages/discoverGenreView' element={<GenreMovieList />} />
+				<Route path='details/:id' element={<Details />} />
+				<Route path='discover' element={<DiscoverGenre />} />
+				<Route path='discover/:genre' element={<GenreMovieList />} />
+				<Route path='toprated' element={<TopRatedList />} />
+				<Route path='popular' element={<PopularList />} />
+				<Route path='toplist' element={<TopList />} />
+				<Route path='toplist/:listname' element={<CreatedTopListView />} />
 			</Route>
 		</Routes>
 	);
 }
 
 export default App;
-
-/* https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg */
-
-/* {
-	 <div className='App'>
-	<div>
-		<h1>Top rated movies</h1>
-		<TopRated source='movie' />
-	</div>
-	<div>
-		<h1>Top rated series</h1>
-		<TopRated source='tv' />
-	</div>
-</div>; 
-}
- */
-
-/* <Route path='/Details' component={Details} /> */

@@ -7,7 +7,6 @@ function classNames(...classes) {
 }
 
 export function DropdownSort({ setSort }) {
-
 	const RatingAsc = "vote_average.asc";
 
 	const RatingDesc = "vote_average.desc";
@@ -19,10 +18,10 @@ export function DropdownSort({ setSort }) {
 	return (
 		<Menu as='div' className='relative inline-block text-left'>
 			<div>
-				<Menu.Button className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'>
+				<Menu.Button className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-[#A27B5C] px-3 py-2 text-md font-semibold text-[white] shadow-sm  hover:opacity-80'>
 					Sort
 					<ChevronDownIcon
-						className='-mr-1 h-5 w-5 text-gray-400'
+						className='-mr-1 h-5 w-5 text-[white]'
 						aria-hidden='true'
 					/>
 				</Menu.Button>
@@ -37,7 +36,7 @@ export function DropdownSort({ setSort }) {
 				leaveFrom='transform opacity-100 scale-100'
 				leaveTo='transform opacity-0 scale-95'
 			>
-				<Menu.Items className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+				<Menu.Items className='absolute left-0 z-10 mt-2 w-56 origin-top-left rounded-md bg-[#A27B5C] shadow-lg focus:outline-none'>
 					<div className='py-1'>
 						<Menu.Item>
 							{({ active }) => (
@@ -47,7 +46,7 @@ export function DropdownSort({ setSort }) {
 									}}
 									href='#'
 									className={classNames(
-										active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+										active ? "bg-[#DCD7C9] text-black" : "text-white",
 										"block px-4 py-2 text-sm"
 									)}
 								>
@@ -63,7 +62,7 @@ export function DropdownSort({ setSort }) {
 									}}
 									href='#'
 									className={classNames(
-										active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+										active ? "bg-[#DCD7C9] text-black" : "text-white",
 										"block px-4 py-2 text-sm"
 									)}
 								>
@@ -79,7 +78,7 @@ export function DropdownSort({ setSort }) {
 									}}
 									href='#'
 									className={classNames(
-										active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+										active ? "bg-[#DCD7C9] text-black" : "text-white",
 										"block px-4 py-2 text-sm"
 									)}
 								>
@@ -95,7 +94,7 @@ export function DropdownSort({ setSort }) {
 									}}
 									href='#'
 									className={classNames(
-										active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+										active ? "bg-[#DCD7C9] text-black" : "text-white",
 										"block px-4 py-2 text-sm"
 									)}
 								>

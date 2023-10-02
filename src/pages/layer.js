@@ -5,16 +5,16 @@ import SearchMovie from "../components/Search";
 
 function Layer() {
 	return (
-		<div className='flex flex-wrap w-full min-h-screen'>
-			<div className='w-screen top-0 sticky'>
+		<div className='flex flex-col max-w-full overflow-hidden '>
+			<div className=' top-0 p-5 bg-[#2C3639]'>
 				<HeaderComponent />
-				<SearchMovie className='flex w-full h-fit' />
-				</div>
-		
-			<div className='w-full min-h-screen bg-[#0d253ff6] text-white'>
+				<SearchMovie />
+			</div>
+
+			<div className='min-h-screen text-white bg-[#3F4E4F]'>
 				<Outlet />
 			</div>
-			<div className='w-screen bottom-0'>
+			<div className=' bottom-0 bg-[#2C3639]'>
 				<FooterComponent />
 			</div>
 		</div>

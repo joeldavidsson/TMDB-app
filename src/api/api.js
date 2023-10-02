@@ -21,11 +21,6 @@ export const fetchPopular = async (page, callback) => {
 	callback(result);
 };
 
-export const fetchImage = (imgPath) => {
-	return imgPath
-		? `https://image.tmdb.org/t/p/w780${imgPath}`
-		: `/img/no_image_w154.png`;
-};
 
 export const fetchDetails = async (titleId, callback) => {
 	const url = `https://api.themoviedb.org/3/movie/${titleId}`;

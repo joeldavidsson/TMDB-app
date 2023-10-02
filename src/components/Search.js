@@ -1,55 +1,52 @@
 import { useEffect } from "react";
-import { fetchSearch, fetchImage } from "../api/api";
+import { fetchSearch } from "../api/api";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { ScrollToTopLink } from "./Utilities";
 import { useRecoilState } from "recoil";
-import { movieIdState, SearchTitleState } from "../states/recoil";
+import { SearchTitleState } from "../states/recoil";
+import { GetPoster } from "./Utilities";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 function SearchMovie() {
 	const [searchTitle, setSearchTitle] = useRecoilState(SearchTitleState);
 	const [page, setPage] = useState(1);
 	const [searchResults, setSearchResults] = useState([]);
-	const [movieId, setMovieId] = useRecoilState(movieIdState);
 
 	useEffect(() => {
 		fetchSearch(searchTitle, page, (data) => {
 			setSearchResults(data.results);
 		});
-	});
-
-	const handleItemClick = (result) => {
-		setMovieId(result.id);
-		setSearchTitle("");
-	};
+	}, [searchTitle]);
 
 	return (
-		<div className='flex flex-col justify-center items-center bg-[#0d253f] w-full p-5'>
-			<input
-				type='text'
-				placeholder='Search for a movie...'
-				value={searchTitle}
-				onChange={(e) => setSearchTitle(e.target.value)}
-				className='self-center w-1/4'
-			/>
-
-			<ul className='flex flex-row flex-wrap self-center w-full '>
+		<div className='flex flex-col'>
+			<span className='flex justify-center items-center gap-2'>
+				<HiMagnifyingGlass className='text-white h-6 w-6' />
+				<input
+					type='text'
+					placeholder='Search for a movie...'
+					value={searchTitle}
+					onChange={(e) => setSearchTitle(e.target.value)}
+					className='self-center text-white w-1/4 text-center text-lg p-1 rounded-2xl  outline-none bg-[#3F4E4F] focus:bg-[#DCD7C9] focus:text-black'
+				/>
+			</span>
+			<ul className='flex flex-row flex-wrap w-full self-center justify-center bg-[#2C3639] absolute z-10  rounded-xl text-white gap-4 mt-10  shadow-2xl '>
 				{searchResults.map((result) => (
 					<div
-						className='hover:bg-red-950'
-						onClick={() => handleItemClick(result)}
 						key={result.id}
+						className='flex flex-col my-5 items-center text-white'
 					>
-						<Link to='./pages/detailsView' className=''>
-							<li className='max-w-[192px] whitespace-nowrap overflow-hidden text-ellipsis'>
+						<ScrollToTopLink
+							to={`../details/${result.id}`}
+							onClick={() => setSearchTitle("")}
+						>
+							<li className='flex w-28 h-44 border-2 border-black hover:opacity-80 shadow-2xl'>
+								<GetPoster movie={result} />
+							</li>
+							<li className='w-28 whitespace-nowrap overflow-hidden text-ellipsis text-center hover:overflow-visible hover:whitespace-normal font-semibold'>
 								{result.title}
 							</li>
-							<li>
-								<img
-									className='w-[192px]'
-									src={fetchImage(result.poster_path)}
-								></img>
-							</li>
-						</Link>
+						</ScrollToTopLink>
 					</div>
 				))}
 			</ul>

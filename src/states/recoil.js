@@ -5,11 +5,6 @@ export const SelectedTitleState = atom({
 	default: {},
 });
 
-export const movieIdState = atom({
-	key: "movieId",
-	default: 0,
-});
-
 export const movieRecState = atom({
 	key: "recommendation",
 	default: [],
@@ -27,5 +22,10 @@ export const GenreIdState = atom({
 
 export const GenreTitleState = atom({
 	key: "genreTitle",
-	default: '',
+	default: "",
+});
+
+export const savedListsState = atom({
+	key: "savedListsState",
+	default: [],
 });

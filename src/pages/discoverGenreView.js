@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { fetchDiscoverBy, fetchImage } from "../api/api";
+import { fetchDiscoverBy } from "../api/api";
 import { useRecoilState } from "recoil";
-import { GenreIdState, movieIdState, GenreTitleState } from "../states/recoil";
-import { HandleItemClick, PageHandler } from "../components/Utilities";
-import { Link } from "react-router-dom";
+import { GenreIdState, GenreTitleState } from "../states/recoil";
+import { PageHandler, GetPoster } from "../components/Utilities";
+import { ScrollToTopLink } from "../components/Utilities";
 import DropdownSort from "../components/DropdownSort";
 
 const GenreMovieList = () => {
@@ -11,7 +11,6 @@ const GenreMovieList = () => {
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(null);
 	const [genreId, setGenreId] = useRecoilState(GenreIdState);
-	const [movieId, setMovieId] = useRecoilState(movieIdState);
 	const [genreTitle, setGenreTitle] = useRecoilState(GenreTitleState);
 	const [sort, setSort] = useState("popularity.desc");
 
@@ -26,24 +25,27 @@ const GenreMovieList = () => {
 
 	return (
 		<div className='flex flex-col justify-center items-center w-full p-10'>
-			<h1 className='text-center text-5xl'>{genreTitle}</h1>
-			<DropdownSort setSort={setSort} />
-			<span className='flex flex-row flex-wrap gap-16 p-10'>
+			<h1 className='text-4xl font-semibold my-5 uppercase'>{genreTitle}</h1>
+			<span className="flex w-full justify-start relative left-24">
+				<DropdownSort setSort={setSort} />
+			</span>
+			<span className='flex flex-row flex-wrap w-full self-center justify-center text-center p-10 gap-10'>
 				{movies.map((item) => (
-					<Link to={`../pages/detailsView/${item.id}`}>
+					<ScrollToTopLink to={`../details/${item.id}`}>
 						<div
 							key={item.id}
-							className='flex flex-col justify-center items-center w-56 text-center'
-							onClick={() => HandleItemClick({ item, setMovieId })}
+							className='flex w-32 h-48 my-4 border-2 border-black hover:opacity-80 shadow-2xl'
 						>
-							<img src={fetchImage(item.poster_path)}></img>
-							<p>{item.title}</p>
+							<GetPoster movie={item} />
+						</div>
+						<div className='w-32 text-center hover:overflow-visible hover:whitespace-normal'>
+							<p className='font-semibold'>{item.title}</p>
 							<p>Rating: {item.vote_average}</p>
 						</div>
-					</Link>
+					</ScrollToTopLink>
 				))}
 			</span>
-			<div className='flex justify-center items-center'>
+			<div className='flex justify-center items-center mb-6'>
 				<PageHandler page={page} setPage={setPage} totalPages={totalPages} />
 			</div>
 		</div>
